@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>성적 예측하기</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>설문조사에 응답하고 성적을 예측해보세요!</h1>
+        <form action="/predict" method="post">
+            <!-- 수치형 변수 입력 -->
+            <h2>개인 정보</h2>
+            <label for="age">나이:</label>
+            <input type="number" name="age" id="age" min="15" max="22" required><br>
+
+            <!-- 범주형 변수 입력 -->
+            <label for="sex">성별:</label>
+            <select name="sex" id="sex" required>
+                <option value="F">여성</option>
+                <option value="M">남성</option>
+            </select><br>
+
+            <label for="address">거주 지역:</label>
+            <select name="address" id="address" required>
+                <option value="U">도시</option>
+                <option value="R">농촌</option>
+            </select><br>
+
+            <label for="famsize">가족 규모:</label>
+            <select name="famsize" id="famsize" required>
+                <option value="LE3">3명 이하</option>
+                <option value="GT3">3명 초과</option>
+            </select><br>
+
+            <label for="Pstatus">부모의 동거 상태:</label>
+            <select name="Pstatus" id="Pstatus" required>
+                <option value="T">함께 거주</option>
+                <option value="A">별거</option>
+            </select><br>
+
+            <h2>부모님의 교육 수준</h2>
+            <label for="Medu">어머니의 교육 수준:</label>
+            <select name="Medu" id="Medu" required>
+                <option value="0">없음</option>
+                <option value="1">초등학교</option>
+                <option value="2">중학교</option>
+                <option value="3">고등학교</option>
+                <option value="4">대학</option>
+            </select><br>
+
+            <!-- 어머니의 직업 -->
+            <label for="Mjob">어머니의 직업:</label>
+            <select name="Mjob" id="Mjob" required>
+                <option value="teacher">교사</option>
+                <option value="health">보건</option>
+                <option value="services">서비스</option>
+                <option value="at_home">전업주부</option>
+                <option value="other">기타</option>
+            </select><br>
+
+            <!-- 아버지의 직업 -->
+            <label for="Fjob">아버지의 직업:</label>
+            <select name="Fjob" id="Fjob" required>
+                <option value="teacher">교사</option>
+                <option value="health">보건</option>
+                <option value="services">서비스</option>
+                <option value="at_home">전업주부</option>
+                <option value="other">기타</option>
+            </select><br>
+
+
+            <label for="Fedu">아버지의 교육 수준:</label>
+            <select name="Fedu" id="Fedu" required>
+                <option value="0">없음</option>
+                <option value="1">초등학교</option>
+                <option value="2">중학교</option>
+                <option value="3">고등학교</option>
+                <option value="4">대학</option>
+            </select><br>
+
+            <h2>학습 관련 정보</h2>
+            <label for="studytime">주당 학습 시간:</label>
+            <select name="studytime" id="studytime" required>
+                <option value="1">2시간 미만</option>
+                <option value="2">2~5시간</option>
+                <option value="3">5~10시간</option>
+                <option value="4">10시간 이상</option>
+            </select><br>
+
+            <!-- 학교 선택 이유 -->
+            <label for="reason">학교 선택 이유:</label>
+            <select name="reason" id="reason" required>
+                <option value="home">집과 가까워서</option>
+                <option value="reputation">학교의 평판</option>
+                <option value="course">특정 교육 과정</option>
+                <option value="other">기타</option>
+            </select><br>
+
+            <!-- 학교 이름 -->
+            <label for="school">학교 이름:</label>
+            <select name="school" id="school" required>
+                <option value="GP">Gabriel Pereira 학교</option>
+                <option value="MS">Mousinho da Silveira 학교</option>
+            </select><br>
+
+            <!-- 통학 시간 -->
+            <label for="traveltime">통학 시간:</label>
+            <select name="traveltime" id="traveltime" required>
+                <option value="1">15분 미만</option>
+                <option value="2">15~30분</option>
+                <option value="3">30분~1시간</option>
+                <option value="4">1시간 초과</option>
+            </select><br>
+
+
+            <!-- 보호자 -->
+            <label for="guardian">보호자:</label>
+            <select name="guardian" id="guardian" required>
+                <option value="mother">어머니</option>
+                <option value="father">아버지</option>
+                <option value="other">기타</option>
+            </select><br>
+
+
+            <label for="failures">과거 실패 과목 수:</label>
+            <input type="number" name="failures" id="failures" min="0" max="3" required><br>
+
+            <label for="schoolsup">추가 교육 지원 여부:</label>
+            <select name="schoolsup" id="schoolsup" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <label for="famsup">가족의 교육 지원 여부:</label>
+            <select name="famsup" id="famsup" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <label for="paid">과외 수업 여부:</label>
+            <select name="paid" id="paid" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <h2>생활 습관 및 활동</h2>
+            <label for="activities">방과후 활동 여부:</label>
+            <select name="activities" id="activities" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <label for="nursery">유치원 다녔는지 여부:</label>
+            <select name="nursery" id="nursery" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <label for="higher">상급 교육 희망 여부:</label>
+            <select name="higher" id="higher" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <label for="internet">인터넷 접속 여부:</label>
+            <select name="internet" id="internet" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <label for="romantic">로맨틱 관계 여부:</label>
+            <select name="romantic" id="romantic" required>
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select><br>
+
+            <h2>기타 정보</h2>
+            <label for="famrel">가족 관계의 질 (1~5):</label>
+            <input type="number" name="famrel" id="famrel" min="1" max="5" required><br>
+
+            <label for="freetime">자유 시간의 양 (1~5):</label>
+            <input type="number" name="freetime" id="freetime" min="1" max="5" required><br>
+
+            <label for="goout">친구와의 외출 빈도 (1~5):</label>
+            <input type="number" name="goout" id="goout" min="1" max="5" required><br>
+
+            <label for="Dalc">평일 알코올 소비량 (1~5):</label>
+            <input type="number" name="Dalc" id="Dalc" min="1" max="5" required><br>
+
+            <label for="Walc">주말 알코올 소비량 (1~5):</label>
+            <input type="number" name="Walc" id="Walc" min="1" max="5" required><br>
+
+            <label for="health">건강 상태 (1~5):</label>
+            <input type="number" name="health" id="health" min="1" max="5" required><br>
+
+            <label for="absences">결석 일수:</label>
+            <input type="number" name="absences" id="absences" min="0" required><br>
+
+            <input type="submit" value="예측하기">
+        </form>
+    </div>
+</body>
+</html>
