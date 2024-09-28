@@ -1,0 +1,5 @@
+# .gitignore 내용
+*.pyc
+__pycache__/
+model_pipeline.pkl
+dataset/
