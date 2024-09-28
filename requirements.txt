@@ -1,9 +1,12 @@
-Flask==2.0.1
-gunicorn==20.1.0
-joblib==1.0.1
+Flask
+gunicorn
+joblib
 numpy
 pandas
 scikit-learn
 matplotlib
 seaborn
 scipy
+setuptools
+wheel
+werkzeug

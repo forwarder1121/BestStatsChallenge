@@ -11,10 +11,10 @@ from scipy import stats
 app = Flask(__name__)
 
 # 모델 로드
-model = joblib.load('../model_pipeline.pkl')
+model = joblib.load('source/model_pipeline.pkl')
 
 # 전체 성적 데이터 로드
-data = pd.read_csv('../dataset/student-mat.csv', sep=';')
+data = pd.read_csv('source/student-mat.csv', sep=';')
 data['G_avg'] = data[['G1', 'G2', 'G3']].mean(axis=1)
 
 # 입력 변수 이름 업데이트
